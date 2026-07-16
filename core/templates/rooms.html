@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Rooms — Royal Frenzo{% endblock %}
+
+{% block content %}
+{% include "_navbar.html" with active_page="rooms" %}
+
+<section class="rooms-page">
+  <div class="rooms-header">
+    <p class="eyebrow">ACCOMMODATIONS</p>
+    <h1 class="rooms-title">Our <em>Finest</em> Rooms</h1>
+
+    <div class="category-filters">
+      <a href="{% url 'core:room_list' %}" class="pill {% if active_category == 'all' %}active{% endif %}">All</a>
+      {% for value, label in categories %}
+        <a href="{% url 'core:room_list' %}?category={{ value }}" class="pill {% if active_category == value %}active{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="room-grid">
+    {% for room in rooms %}
+      <a href="{{ room.get_absolute_url }}" class="room-card">
+        <div class="room-card-media">
+          {% if room.image %}
+            <img src="{{ room.image.url }}" alt="{{ room.name }}">
+          {% else %}
+            <div class="room-card-placeholder"></div>
+          {% endif %}
+          <span class="room-tag">{{ room.get_category_display }}</span>
+          <button class="room-like" aria-label="Save room" onclick="event.preventDefault()">
+            <svg width="16" height="15" viewBox="0 0 24 22" fill="none"><path d="M12 20.5S2 14.7 2 8.2C2 4.8 4.7 2 8 2c2 0 3.6 1 4 2.4C12.4 3 14 2 16 2c3.3 0 6 2.8 6 6.2 0 6.5-10 12.3-10 12.3Z" stroke="currentColor" stroke-width="1.5"/></svg>
+          </button>
+        </div>
+
+        <div class="room-card-body">
+          <div class="room-card-top">
+            <h3>{{ room.name }}</h3>
+            <span class="room-rating">★ {{ room.rating }}</span>
+          </div>
+          <p class="room-location">{{ room.location }}</p>
+
+          <div class="room-specs">
+            <span>{{ room.beds }} Beds</span>
+            <span>{{ room.baths }} Bath</span>
+            <span>{{ room.sqft }} sqft</span>
+          </div>
+
+          <div class="room-card-footer">
+            <div class="room-price">₦{{ room.price_per_night|floatformat:0 }} <span>/ night</span></div>
+            <span class="btn-reserve">Reserve →</span>
+          </div>
+        </div>
+      </a>
+    {% empty %}
+      <p class="rooms-empty">No rooms in this category yet — check back soon.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

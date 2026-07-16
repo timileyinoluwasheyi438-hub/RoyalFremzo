@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ room.name }} — Royal Frenzo{% endblock %}
+
+{% block content %}
+{% include "_navbar.html" with active_page="rooms" %}
+
+<section class="room-detail">
+  <div class="room-detail-media">
+    {% if room.image %}
+      <img src="{{ room.image.url }}" alt="{{ room.name }}">
+    {% else %}
+      <div class="room-card-placeholder large"></div>
+    {% endif %}
+  </div>
+
+  <div class="room-detail-body">
+    <a href="{% url 'core:room_list' %}" class="back-link">← Back to Rooms</a>
+
+    <span class="room-tag">{{ room.get_category_display }}</span>
+    <h1 class="room-detail-title">{{ room.name }}</h1>
+    <p class="room-location">{{ room.location }} &nbsp;•&nbsp; ★ {{ room.rating }}</p>
+
+    <div class="room-specs large">
+      <span>{{ room.beds }} Beds</span>
+      <span>{{ room.baths }} Bath</span>
+      <span>{{ room.sqft }} sqft</span>
+    </div>
+
+    <p class="room-detail-desc">
+      {{ room.description|default:room.short_description }}
+    </p>
+
+    <div class="room-detail-footer">
+      <div class="room-price large">₦{{ room.price_per_night|floatformat:0 }} <span>/ night</span></div>
+      <a href="{% url 'core:booking_create' room.slug %}" class="btn-primary">Reserve Now
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+{% if related_rooms %}
+<section class="related-rooms">
+  <h2>You Might Also Like</h2>
+  <div class="room-grid">
+    {% for r in related_rooms %}
+      <a href="{{ r.get_absolute_url }}" class="room-card">
+        <div class="room-card-media">
+          {% if r.image %}
+            <img src="{{ r.image.url }}" alt="{{ r.name }}">
+          {% else %}
+            <div class="room-card-placeholder"></div>
+          {% endif %}
+          <span class="room-tag">{{ r.get_category_display }}</span>
+        </div>
+        <div class="room-card-body">
+          <div class="room-card-top">
+            <h3>{{ r.name }}</h3>
+            <span class="room-rating">★ {{ r.rating }}</span>
+          </div>
+          <div class="room-card-footer">
+            <div class="room-price">₦{{ r.price_per_night|floatformat:0 }} <span>/ night</span></div>
+            <span class="btn-reserve">Reserve →</span>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

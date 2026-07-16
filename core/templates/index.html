@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Royal Frenzo — Stay in Serenity{% endblock %}
+
+{% block content %}
+{% include "_navbar.html" %}
+
+<div id="top"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <video class="hero-media" autoplay muted loop playsinline>
+    <source src="{% static 'videos/vid2.mp4' %}" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <p class="eyebrow">WELCOME TO ROYAL FRENZO</p>
+    <h1 class="hero-title">
+      Stay in
+      <em>Serenity.</em>
+    </h1>
+    <p class="hero-desc">
+      Experience a standard of luxury where personalised service meets
+      modern sophistication. Discover your sanctuary in the heart of Lagos.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#rooms" class="btn-primary">Book Your Stay
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+      <a href="#rooms" class="btn-ghost">
+        <span class="play-dot">►</span> Explore Suites
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+{% comment %} <section id="about" class="about-section">
+  <p class="eyebrow">ABOUT US</p>
+  <h2 class="section-title">A Legacy of <em>Quiet Luxury</em></h2>
+  <p class="about-text">
+    Royal Frenzo sits in the heart of Lagos, built around one idea: that true
+    luxury is felt, not announced. Every room, every corridor, every member
+    of staff is here to make your stay feel effortless — from the moment you
+    arrive to the moment you wish you hadn't left.
+  </p>
+
+  <div class="about-stats">
+    <div><strong>120+</strong><span>Rooms &amp; Suites</span></div>
+    <div><strong>4.9</strong><span>Average Rating</span></div>
+    <div><strong>15</strong><span>Years of Service</span></div>
+  </div>
+</section>
+ {% endcomment %}
+<!-- ============ ROOMS ============ -->
+<section id="rooms" class="rooms-page">
+  <div class="rooms-header">
+    <p class="eyebrow">ACCOMMODATIONS</p>
+    <h2 class="rooms-title">Our <em>Finest</em> Rooms</h2>
+
+    <div class="category-filters">
+      <a href="{% url 'core:home' %}#rooms" class="pill {% if active_category == 'all' %}active{% endif %}">All</a>
+      {% for value, label in categories %}
+        <a href="{% url 'core:home' %}?category={{ value }}#rooms" class="pill {% if active_category == value %}active{% endif %}">{{ label }}</a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="room-grid">
+    {% for room in rooms %}
+      <a href="{{ room.get_absolute_url }}" class="room-card">
+        <div class="room-card-media">
+          {% if room.image %}
+            <img src="{{ room.image.url }}" alt="{{ room.name }}">
+          {% else %}
+            <div class="room-card-placeholder"></div>
+          {% endif %}
+          <span class="room-tag">{{ room.get_category_display }}</span>
+        </div>
+
+        <div class="room-card-body">
+          <div class="room-card-top">
+            <h3>{{ room.name }}</h3>
+            <span class="room-rating">★ {{ room.rating }}</span>
+          </div>
+          <p class="room-location">{{ room.location }}</p>
+
+          <div class="room-specs">
+            <span>{{ room.beds }} Beds</span>
+            <span>{{ room.baths }} Bath</span>
+            <span>{{ room.sqft }} sqft</span>
+          </div>
+
+          <div class="room-card-footer">
+            <div class="room-price">₦{{ room.price_per_night|floatformat:0 }} <span>/ night</span></div>
+            <span class="btn-reserve">Reserve →</span>
+          </div>
+        </div>
+      </a>
+    {% empty %}
+        <p>kj</p>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="services-section">
+  <p class="eyebrow">WHAT'S INCLUDED</p>
+  <h2 class="section-title">World-Class <em>Amenities</em></h2>
+  <p class="section-subtext">Everything you need, thoughtfully arranged. Nothing you don't.</p>
+
+
+
+
+
+  
+    <div class="cards-grid">
+      
+      <!-- Card 1 -->
+      <div class="amenity-card">
+        <div class="image-box">
+          <img src="/static/images/amenities/private-dining.jpg" alt="Private Dining">
+        </div>
+        <div class="card-content">
+          <h3>Private Dining</h3>
+          <p>Farm-to-table menu by our executive chef. Chef's table on request.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="amenity-card">
+        <div class="image-box">
+          <img src="/static/images/amenities/infinity-pool.jpg" alt="Infinity Pool">
+        </div>
+        <div class="card-content">
+          <h3>Infinity Pool</h3>
+          <p>Heated 25-metre rooftop pool overlooking Lagos. Private to guests only.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="amenity-card">
+        <div class="image-box">
+          <img src="/static/images/amenities/spa.jpg" alt="Spa & Wellness">
+        </div>
+        <div class="card-content">
+          <h3>Spa & Wellness</h3>
+          <p>Full-service spa with massage, sauna, and steam room.</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="amenity-card">
+        <div class="image-box">
+          <img src="/static/images/amenities/airport-transfer.jpg" alt="Airport Transfer">
+        </div>
+        <div class="card-content">
+          <h3>Airport Transfer</h3>
+          <p>Complimentary chauffeur service for suite and penthouse guests.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+
+<section id="gallery" class="gallery-section">
+  <p class="eyebrow">GALLERY</p>
+  <h2 class="section-title">Moments at <em>Royal Frenzo</em></h2>
+
+  <div class="gallery-filters">
+    <button class="pill active" data-filter="all">All</button>
+    <button class="pill" data-filter="rooms">Rooms</button>
+    <button class="pill" data-filter="restaurant">Restaurant</button>
+    <button class="pill" data-filter="pool">Pool</button>
+    <button class="pill" data-filter="events">Events</button>
+    <button class="pill" data-filter="exterior">Exterior</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <!-- Gallery Cards -->
+    <div class="gallery-item" data-category="rooms">
+      <img src="/static/images/gallery/hotel-lobby.jpg" alt="Hotel Lobby">
+      <span>Hotel Lobby</span>
+    </div>
+    <div class="gallery-item" data-category="rooms">
+      <img src="/static/images/gallery/luxury-room.jpg" alt="Luxury Room">
+      <span>Luxury Room</span>
+    </div>
+    <div class="gallery-item" data-category="restaurant">
+      <img src="/static/images/gallery/hotel-dining.jpg" alt="Hotel Dining">
+      <span>Hotel Dining</span>
+    </div>
+    <div class="gallery-item" data-category="pool">
+      <img src="/static/images/gallery/pool-view.jpg" alt="Pool View">
+      <span>Pool View</span>
+    </div>
+    <div class="gallery-item" data-category="rooms">
+      <img src="/static/images/gallery/spa.jpg" alt="Spa">
+      <span>Spa</span>
+    </div>
+    <div class="gallery-item" data-category="events">
+      <img src="/static/images/gallery/rooftop-bar.jpg" alt="Rooftop Bar">
+      <span>Rooftop Bar</span>
+    </div>
+    <div class="gallery-item" data-category="exterior">
+      <img src="/static/images/gallery/hotel-facade.jpg" alt="Hotel Facade">
+      <span>Hotel Facade</span>
+    </div>
+    <div class="gallery-item" data-category="events">
+      <img src="/static/images/gallery/private-events-hall.jpg" alt="Private Events Hall">
+      <span>Private Events Hall</span>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox overlay -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials-section">
+  <p class="eyebrow">GUEST REVIEWS</p>
+  <h2 class="section-title">What Our <em>Guests</em> Say</h2>
+
+  <div class="testimonial-carousel">
+    <button class="carousel-arrow" id="testimonialPrev" aria-label="Previous review">←</button>
+
+    <div class="testimonial-track" id="testimonialTrack">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"I've stayed in hotels four times the price. None of them made me feel the way Royal Frenzo did — the staff remembered my name by the second day."</p>
+        <strong>— Amaka O.</strong>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"The Royal Penthouse Suite was beyond anything I expected. Waking up to that skyline view every morning was worth every naira."</p>
+        <strong>— Tunde A.</strong>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★☆</div>
+        <p>"Quiet, elegant, and the private dining team went out of their way for our anniversary. We'll be back."</p>
+        <strong>— Ifeoma N.</strong>
+      </div>
+    </div>
+
+    <button class="carousel-arrow" id="testimonialNext" aria-label="Next review">→</button>
+  </div>
+</section>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="cta-banner">
+  <h2>Ready for a Stay You Won't Forget?</h2>
+  <p>Reserve your room today and experience Royal Frenzo for yourself.</p>
+  <a href="#rooms" class="btn-primary">Book Your Stay
+<svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" stroke-width="1.6"/></svg>
+  </a>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" class="contact-section">
+  <p class="eyebrow">GET IN TOUCH</p>
+  <h2 class="section-title">Plan Your <em>Stay</em></h2>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p><strong>Address</strong><br>3 Amore Street, off Toyin Street, Ikeja, Lagos</p>
+      <p><strong>Phone</strong><br>+234 800 000 0000</p>
+      <p><strong>Email</strong><br>reservations@royalfrenzo.com</p>
+    </div>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Your Email">
+      <textarea rows="4" placeholder="Message"></textarea>
+      <button type="submit" class="btn-primary full-width">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <p>© 2026 Royal Frenzo. All rights reserved.</p>
+</footer>
+
+{% endblock %}

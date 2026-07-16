@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Book {{ room.name }} — Royal Frenzo{% endblock %}
+
+{% block content %}
+
+{% include "_navbar.html" with active_page="rooms" %}
+
+<section class="booking-page">
+  <div class="booking-summary">
+    <a href="{{ room.get_absolute_url }}" class="back-link">← Back to {{ room.name }}</a>
+    <h1>Reserve Your Stay</h1>
+    <div class="booking-room-card">
+      {% if room.image %}
+        <img src="{{ room.image.url }}" alt="{{ room.name }}">
+      {% endif %}
+      <div>
+        <h3>{{ room.name }}</h3>
+        <p class="room-location">{{ room.location }}</p>
+        <div class="room-price">₦{{ room.price_per_night|floatformat:0 }} <span>/ night</span></div>
+      </div>
+    </div>
+  </div>
+
+  <form method="post" class="booking-form">
+    {% csrf_token %}
+
+    {% if messages %}
+      {% for message in messages %}
+        <p class="form-message">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <div class="form-row">
+      <label>Full Name</label>
+      <input type="text" name="full_name" required>
+    </div>
+
+    <div class="form-row">
+      <label>Email</label>
+      <input type="email" name="email" required>
+    </div>
+
+    <div class="form-row">
+      <label>Phone</label>
+      <input type="tel" name="phone">
+    </div>
+
+    <div class="form-row split">
+      <div>
+        <label>Check-in</label>
+        <input type="date" name="check_in" required>
+      </div>
+      <div>
+        <label>Check-out</label>
+        <input type="date" name="check_out" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Guests</label>
+      <input type="number" name="guests" min="1" value="1">
+    </div>
+
+    <div class="form-row">
+      <label>Notes (optional)</label>
+      <textarea name="notes" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn-primary full-width">Confirm Reservation</button>
+  </form>
+</section>
+
+{% endblock  %}
