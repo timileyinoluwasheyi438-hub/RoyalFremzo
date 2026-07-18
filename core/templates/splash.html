@@ -1,0 +1,266 @@
+> Sonubi:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Fremzo Hotel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Cormorant+Garamond:wght@400;500;600&display=swap');
+
+  :root{
+    --purple-deep: #150A27;
+    --purple: #241340;
+    --violet: #4A2A78;
+    --lilac: #C9A6F0;
+    --lilac-soft: #EDE4F5;
+    --gold: #D4AF6A;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html, body{ height:100%; background: var(--purple-deep); }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    font-family:'Cormorant Garamond', serif;
+  }
+
+  .splash{
+    position:relative;
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:
+      radial-gradient(ellipse at 50% 20%, rgba(201,166,240,0.16) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 100%, rgba(74,42,120,0.35) 0%, transparent 60%),
+      linear-gradient(180deg, var(--purple) 0%, var(--purple-deep) 100%);
+    overflow:hidden;
+  }
+
+  .splash::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(237,228,245,0.012) 0px,
+      rgba(237,228,245,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events:none;
+  }
+
+  .eyebrow{
+    font-size: 0.68rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+    display:flex;
+    gap: 2px;
+  }
+
+  .eyebrow span{
+    display:inline-block;
+    opacity:0;
+    transform: translateY(6px);
+    animation: charIn 0.5s ease-out forwards;
+  }
+
+  @keyframes charIn{
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .wordmark{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    color: var(--lilac-soft);
+    font-size: clamp(2.3rem, 7vw, 4rem);
+    letter-spacing: 0.03em;
+    text-align:center;
+    line-height: 1.05;
+  }
+
+  .wordmark .word{
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:top;
+  }
+
+  .wordmark .word span{
+    display:inline-block;
+    opacity:0;
+    transform: translateY(100%);
+    animation: wordUp 0.85s cubic-bezier(.22,1,.36,1) forwards;
+  }
+
+  @keyframes wordUp{
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .wordmark em{
+    font-style: italic;
+    font-weight:500;
+    color: var(--lilac);
+  }
+
+  .rule{
+    width:0;
+    height:1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 20px 0;
+    animation: extend 0.9s ease-out 1.65s forwards;
+  }
+
+  @keyframes extend{
+    to{ width: 220px; }
+  }
+
+  .tagline{
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-align:center;
+    color: rgba(237,228,245,0.75);
+    max-width: 320px;
+  }
+
+  .tagline .word{
+    display:inline-block;
+    opacity:0;
+    filter: blur(4px);
+    animation: blurIn 0.6s ease-out forwards;
+  }
+
+  @keyframes blurIn{
+    to{ opacity:1; filter: blur(0); }
+  }
+
+  .loader{
+    position:absolute;
+    bottom: 56px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    opacity:0;
+    animation: fadeUp 0.8s ease-out 2.7s forwards;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .loader .dot{
+    width:4px; height:4px;
+    border-radius:50%;
+    background: var(--lilac);
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  .loader .dot:nth-child(2){ animation-delay: 0.2s; }
+  .loader .dot:nth-child(3){ animation-delay: 0.4s; }
+
+  @keyframes pulse{
+    0%, 100%{ opacity:0.3; transform: scale(0.85); }
+    50%{ opacity:1; transform: scale(1.15); background: var(--gold); }
+  }
+
+  .loader-label{
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(237,228,245,0.4);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow span, .wordmark .word span, .rule, .tagline .word, .
+
+> Sonubi:
+loader{
+      animation-duration: 0.01s !important;
+      animation-delay: 0s !important;
+    }
+    .rule{ width:220px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="splash">
+  <div class="eyebrow" id="eyebrow"></div>
+
+  <div class="wordmark" id="wordmark"></div>
+
+  <div class="rule"></div>
+
+  <div class="tagline" id="tagline"></div>
+
+  <div class="loader">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="loader-label">Preparing your stay</span>
+  </div>
+</div>
+
+<script>
+  // Eyebrow: letter by letter
+  const eyebrowText = "EST. LUXURY";
+  const eyebrowEl = document.getElementById('eyebrow');
+  [...eyebrowText].forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.textContent = ch === " " ? "\u00A0" : ch;
+    s.style.animationDelay = (0.15 + i * 0.035) + 's';
+    eyebrowEl.appendChild(s);
+  });
+
+  // Wordmark: word by word, sliding up out of a clipped mask
+  const words = [
+    { text: "ROYAL", em: false },
+    { text: "FREMZO", em: true }
+  ];
+  const wordmarkEl = document.getElementById('wordmark');
+  let wDelay = 0.55;
+  words.forEach((w, i) => {
+    const wrap = document.createElement('span');
+    wrap.className = 'word';
+    const inner = document.createElement('span');
+    inner.textContent = w.text;
+    inner.style.animationDelay = wDelay + 's';
+    if (w.em) {
+      const em = document.createElement('em');
+      em.textContent = w.text;
+      inner.textContent = '';
+      inner.appendChild(em);
+    }
+    wrap.appendChild(inner);
+    wordmarkEl.appendChild(wrap);
+    if (i < words.length - 1) wordmarkEl.appendChild(document.createTextNode(' '));
+    wDelay += 0.22;
+  });
+
+  // Tagline: word by word blur-in
+  const taglineText = "Hotel & Residences — where every arrival feels expected.";
+  const taglineEl = document.getElementById('tagline');
+  const tWords = taglineText.split(' ');
+  let tDelay = 1.85;
+  tWords.forEach((w, i) => {
+    const s = document.createElement('span');
+    s.className = 'word';
+    s.textContent = w;
+    s.style.animationDelay = tDelay + 's';
+    taglineEl.appendChild(s);
+    if (i < tWords.length - 1) taglineEl.appendChild(document.createTextNode(' '));
+    tDelay += 0.09;
+  });
+  setTimeout(() => {
+  window.location.href = "{% url 'core:home' %}";
+}, 4200);
+</script>
+
+</body>
+</html>
