@@ -6,9 +6,12 @@ app_name = 'core'
 
 
 urlpatterns = [
-    path('',views.home, name='home'),
-    path('rooms/',views.room_list, name='room_list'),
+    path('',views.splash, name='splash'),
+    path('home',views.home, name='home'),
+    path('rooms/',views.home, name='room_list'),
     path('room/<slug:slug>/', views.room_detail, name='room_detail'),
-    path('booking/create/<slug:room_slug>/',views.booking_create, name='booking_create')
+    path('booking/create/<slug:slug>/',views.booking_create, name='booking_create'),
+   
+
 
 ]

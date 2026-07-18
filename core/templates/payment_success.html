@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Payment Successful — Royal Frenzo{% endblock %}
+
+{% block content %}
+{% include "_navbar.html" %}
+
+<section class="success-page">
+  <div class="success-icon">✓</div>
+  <h1>Payment Successful</h1>
+  <p class="success-subtext">
+    Your reservation at <strong>{{ booking.room.name }}</strong> is confirmed.
+    A confirmation has been sent to <strong>{{ booking.email }}</strong>.
+  </p>
+
+  <div class="success-summary">
+    <div><span>Room</span><strong>{{ booking.room.name }}</strong></div>
+    <div><span>Check-in</span><strong>{{ booking.check_in }}</strong></div>
+    <div><span>Check-out</span><strong>{{ booking.check_out }}</strong></div>
+    <div><span>Guests</span><strong>{{ booking.guests }}</strong></div>
+    <div><span>Amount Paid</span><strong>₦{{ booking.amount|floatformat:0 }}</strong></div>
+    <div><span>Reference</span><strong>{{ booking.paystack_reference }}</strong></div>
+  </div>
+
+  <a href="{% url 'core:home' %}" class="btn-primary">Back to Home
+    <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M1 6H15M15 6L10 1M15 6L10 11" stroke="currentColor" stroke-width="1.6"/></svg>
+  </a>
+</section>
+{% endblock %}

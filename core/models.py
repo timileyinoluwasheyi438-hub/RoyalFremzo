@@ -35,6 +35,7 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
+    amount =models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='bookings')
     full_name = models.CharField(max_length=150)
     email = models.EmailField()
