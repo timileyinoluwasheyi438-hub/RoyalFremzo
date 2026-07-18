@@ -20,7 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',   # For development
-    # Your apps
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
     'core',
     # 'rooms', etc.
 ]
@@ -54,6 +56,14 @@ TEMPLATES = [
     },
 ]
 
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('dgvpwsxy0'),
+    'API_KEY': os.environ.get('564321755454527'),
+    'API_SECRET': os.environ.get('gscG8b7caHbSG2wnfiTHJx4gtVQ'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 WSGI_APPLICATION = 'hotel_website_engine.wsgi.application'
 
 # Database
