@@ -74,7 +74,12 @@ DATABASES = {
 # Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static')
+]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+]
 
 # Whitenoise for production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
