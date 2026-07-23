@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 
 class Room(models.Model):
@@ -20,7 +21,7 @@ class Room(models.Model):
     rating = models.DecimalField(max_digits=2, decimal_places=1, default=4.8)
     short_description = models.CharField(max_length=200, blank=True)
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='rooms/', blank=True, null=True)
+    image = CloudinaryField('image', blank=True,null=True)
     is_featured = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
