@@ -70,15 +70,18 @@ DATABASES = {
 # Cloudinary (hardcoded for testing)
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dgvpwsxy0',
-    'API_KEY': '896347311724583',
-    'API_SECRET': 'XDKsR8Kchk1Mf-4J0XvBLvuzjOE',
+    'API_KEY': '626113587682237',
+    'API_SECRET': 'J2SvuQ_fWoqB04yNIWsOw6yVV8A',
 }
 
 cloudinary.config(
     cloud_name = 'dgvpwsxy0',
-    api_key = '896347311724583',
-    api_secret = 'XDKsR8Kchk1Mf-4J0XvBLvuzjOE'
+    api_key = '626113587682237',
+    api_secret = 'J2SvuQ_fWoqB04yNIWsOw6yVV8A'
 )
+
+
+
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Static & Media
