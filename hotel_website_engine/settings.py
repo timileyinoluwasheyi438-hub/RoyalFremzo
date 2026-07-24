@@ -67,21 +67,20 @@ DATABASES = {
     }
 }
 
-# Cloudinary
+# Cloudinary (hardcoded for testing)
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('dgvpwsxy0'),
-    'API_KEY': os.getenv('564321755454527'),
-    'API_SECRET': os.getenv('gscG8b7caHbSG2wnfiTHJx4gtVQ'),
+    'CLOUD_NAME': 'dgvpwsxy0',
+    'API_KEY': '896347311724583',
+    'API_SECRET': 'XDKsR8Kchk1Mf-4J0XvBLvuzjOE',
 }
 
 cloudinary.config(
-    cloud_name = os.getenv('dgvpwsxy0git'),
-    api_key = os.getenv('564321755454527'),
-    api_secret = os.getenv('gscG8b7caHbSG2wnfiTHJx4gtVQ')
+    cloud_name = 'dgvpwsxy0',
+    api_key = '896347311724583',
+    api_secret = 'XDKsR8Kchk1Mf-4J0XvBLvuzjOE'
 )
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 # Static & Media
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -97,12 +96,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'timileyinoluwasheyi1438@gmail.com'
-EMAIL_HOST_PASSWORD = 'zczbezncwgalegwo'   # your current app password
+EMAIL_HOST_USER = 'timileyinoluwasheyi438@gmail.com'
+EMAIL_HOST_PASSWORD = 'rwtgkapzpygewysm'   # your current app password
 EMAIL_TIMEOUT = 30
 
-DEFAULT_FROM_EMAIL = 'Royal Frenzo <timileyinoluwasheyi1438@gmail.com>'
-ADMIN_EMAIL = 'timileyinoluwasheyi1438@gmail.com'
+DEFAULT_FROM_EMAIL = 'Royal Frenzo <timileyinoluwasheyi438@gmail.com>'
+ADMIN_EMAIL = 'timileyinoluwasheyi438@gmail.com'
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Lagos'
